@@ -1,0 +1,29 @@
+/*######################
+  portd is used
+  pin 2 is configured as output
+  refer datasheet page no 72 for register addresses.
+  #######################*/
+void port_initializations(void);
+void outport(char );
+void port_initializations()
+{
+  volatile char *portd_dir;
+  portd_dir=0x2A;          //address of portd direction register
+  *portd_dir=0x04;          //to make pin2 as output "00000100" make 1 at that pin
+}
+void outport(char outdata)
+{
+  volatile char *portd_data;
+  portd_data=0x2B;     //address of port d data register
+  *portd_data=outdata; 
+}
+void setup() {
+  // put your setup code here, to run once:
+   port_initializations();
+   outport(0x04); //making that pin digital high
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
